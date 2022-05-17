@@ -15,7 +15,7 @@ final class intendedAcc {
 }
 
 public class Main {
-    // Handles
+    // Handles bank selection
     static intendedAcc bankSelect(Bank[] accSelection) {
         Scanner userInp = new Scanner(System.in);
         System.out.print("Enter first name: ");
@@ -47,7 +47,7 @@ public class Main {
         }
         return new intendedAcc(bankChoice, customerNum);
     }
-
+    // Handles authentication of password
     static boolean PINAuthentication(intendedAcc accLocInfo) {
         Scanner userInp = new Scanner(System.in);
         System.out.print("Enter PIN: ");
@@ -77,7 +77,7 @@ public class Main {
             System.out.println("(5) Account info");
             System.out.println("(6) Exit");
             choice = userInp.nextInt();
-            if (choice == 1) {
+            if (choice == 1) { // Create new account
                 System.out.println("Select bank: ");
                 Bank bankChoice = null;
                 int bankNum;
@@ -112,7 +112,7 @@ public class Main {
                 bankChoice.addCustomer(f, l);
                 newAcc.setPIN(newPIN);
                 bankChoice.getCustomer(bankChoice.getNumOfCustomers()-1).setAccount(newAcc);
-            } else if (choice == 2) {
+            } else if (choice == 2) { // Deposit into account
                 intendedAcc accLocInfo = bankSelect(listOfBanks);
                 System.out.print("Enter deposit: ");
                 double deposit = userInp.nextInt();
@@ -125,7 +125,7 @@ public class Main {
                     accLocInfo.bankChoice.getCustomer(accLocInfo.customerNum).getAccount().deposit(deposit);
                     System.out.println("$" + deposit + " deposited successfully");
                 }
-            } else if (choice == 3) {
+            } else if (choice == 3) { // Withdraw from account
                 intendedAcc accLocInfo = bankSelect(listOfBanks);
                 System.out.print("Amount of money to withdraw: ");
                 double withdrawal = userInp.nextDouble();
@@ -142,7 +142,7 @@ public class Main {
                         System.out.println("Balance insufficient");
                     }
                 }
-            } else if (choice == 4) {
+            } else if (choice == 4) { // Transfer to another account
                 System.out.println("(Donor's account)");
                 intendedAcc donorAcc = bankSelect(listOfBanks);
                 System.out.println("(Recipient's account)");
@@ -163,7 +163,7 @@ public class Main {
                     }
                     recpntAcc.bankChoice.getCustomer(recpntAcc.customerNum).getAccount().deposit(transferMoney);
                 }
-            } else if (choice == 5) {
+            } else if (choice == 5) { // Account info
                 intendedAcc accLocInfo = bankSelect(listOfBanks);
                 boolean isAuthentic = PINAuthentication(accLocInfo);
                 if (isAuthentic) {
@@ -172,7 +172,7 @@ public class Main {
                     continue;
                 }
             }
-            else if (choice == 6) {
+            else if (choice == 6) { // Exit
                 break;
             }
         }
